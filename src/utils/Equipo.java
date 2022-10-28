@@ -9,9 +9,8 @@ public class Equipo {
 	private List<Persona> integrantes;
 	
 	public Equipo(String nombre) {
-		super();
 		this.nombre = nombre;
-		this.integrantes = new ArrayList<Persona>();
+		integrantes = new ArrayList<Persona>();
 	}
 	
 	public void agregarPersona(Persona p) {

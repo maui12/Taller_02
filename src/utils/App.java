@@ -93,10 +93,10 @@ public class App {
 			switch(respuesta) {
 				
 				case "8":
-					sistema.mostrarPersonas(personas);
+					sistema.mostrarPersonas();
 					break;
 				case "9":
-					sistema.mostrarEquipos(equipos);
+					sistema.mostrarEquipos();
 					break;
 			}
 		}

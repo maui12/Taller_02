@@ -11,7 +11,7 @@ public class Persona {
 		this.nombre = nombre;
 		this.identificacion = identificacion;
 		this.especialidad = especialidad;
-		this.equipo = null;
+		equipo = null;
 	}
 	
 	
