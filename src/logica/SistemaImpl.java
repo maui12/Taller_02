@@ -607,7 +607,53 @@ public class SistemaImpl implements Sistema{
 	
 	//16)
 	public void cambiarPiezas(String robot) {
+		Scanner scan = new Scanner(System.in);
+		boolean encontrado = false;
 		
+		for(Robot r : robots) {
+			if(r.getNombre().equalsIgnoreCase(robot)) {
+				encontrado = true;
+				System.out.println("Piezas del robot: ");
+				for(Pieza p : r.getPiezas()) {
+					System.out.println(p.toString());
+				}
+				break;
+			}
+		}
+		
+		if(!encontrado) {
+			System.out.println("--------------------");
+			System.out.println("Robot no encontrado");
+			System.out.println("--------------------");
+			return;
+		}
+		
+		System.out.println("Introduzca el codigo de una Pieza para cambiar:");
+		String nombrePieza = scan.nextLine();
+		
+		for(Pieza p : piezas) {
+			if(nombrePieza.equalsIgnoreCase(p.getCodigo())) {
+				System.out.println("-Piezas disponibles para cambio:");
+				for(Pieza p2 : piezas) {
+					if(p2.getTipo().equals(p.getTipo())) {
+						System.out.println(p2.toString());
+					}
+				}
+				break;
+			}
+		}
+		System.out.println("¿Por cual pieza quiere cambiarla?(Ingrese codigo):");
+		String nombrePieza2 = scan.nextLine();
+		
+		for(Robot r : robots) {
+			if(r.getNombre().equalsIgnoreCase(robot)) {
+				for(Pieza p1 : piezas) {
+					if(p1.getCodigo().equalsIgnoreCase(nombrePieza2) ) {
+						r.cambiarPieza(p1);
+					}
+				}
+			}
+		}
 	}
 	
 	

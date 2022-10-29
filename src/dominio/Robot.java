@@ -18,6 +18,19 @@ public class Robot {
 		equipo = null;
 		piloto = null;
 	}
+	
+	public void cambiarPieza(Pieza pieza) {
+		for(int i = 0 ; i < piezas.size() ; i++) {
+			if(pieza.getTipo().equals(piezas.get(i).getTipo())) {
+				piezas.add(i, pieza);
+				piezas.remove(i+1);
+				System.out.println("-------------------------------");
+				System.out.println("Cambio realizado exitosamente.");
+				System.out.println("-------------------------------");
+				return;
+			}
+		}
+	}
 
 	public String getNombre() {
 		return nombre;

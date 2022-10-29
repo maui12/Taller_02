@@ -130,7 +130,8 @@ public class App {
 						sistema.mostrarPiezasArmas();
 						break;
 					case "16":
-						
+						cambiarPiezasDeRobot(sistema);
+						break;
 						
 				}
 			}
@@ -197,5 +198,13 @@ public class App {
 		String respuesta = scan1.nextLine();
 		
 		sistema.anadirStockM(respuesta);
+	}
+	//15)
+	public static void cambiarPiezasDeRobot(Sistema sistema) {
+		Scanner scan1 = new Scanner(System.in);
+		System.out.print("Ingrese nombre de un Robot para cambiar sus piezas: ");
+		String respuesta = scan1.nextLine();
+		
+		sistema.cambiarPiezas(respuesta);
 	}
 }

@@ -1,1 +1,3 @@
 casco samurai,00001,cabeza,Japón,100
+piernas de velocidad,00004,piernas,Alemania,20
+casco vikingo,00005,cabeza,Noruega,150

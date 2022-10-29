@@ -79,8 +79,8 @@ public class Pieza {
 	@Override
 	public String toString() {
 		return "Pieza [nombre=" + nombre + ", codigo=" + codigo + ", tipo=" + tipo + ", cantidadProducida="
-				+ cantidadProducida + ", paisOrigen=" + paisOrigen + ", cantidadMaterial=" + cantidadMaterial
-				+ ", material=" + material + "]";
+				+ cantidadProducida + ", paisOrigen=" + paisOrigen.getNombre() + ", cantidadMaterial=" + cantidadMaterial
+				+ ", material=" + material.getNombre() + "]";
 	}
 	
 }
