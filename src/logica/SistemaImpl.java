@@ -63,10 +63,14 @@ public class SistemaImpl implements Sistema{
 		while(archPa.hasNextLine()) {
 			String[] partes = archPa.nextLine().split(",");
 			Pais pais = new Pais(partes[0]);
+			int cont = 0;
 			for(Pais p : paises) {
-				if(!p.getNombre().equals(partes[0])){
-					paises.add(pais);
+				if(p.getNombre().equals(partes[0])){
+					cont++;
 				}
+			}
+			if(cont == 0) {
+				paises.add(pais);				
 			}
 			if(partes[1].equals("pieza")) {
 				for(Pieza p : piezas) {
@@ -94,14 +98,47 @@ public class SistemaImpl implements Sistema{
 					}
 				}
 			}
-			for(Material m : materiales) {
-				if(m.getNombre().equals(partes[4])) {
-					m.setPaisOrigen(pais);
+			
+			Scanner scanM = new Scanner(new File("Materiales.txt"));
+			while(scanM.hasNextLine()) {
+				String [] part = scanM.nextLine().split(",");
+				for(int i = 0; i < paises.size(); i++) {
+					if(paises.get(i).getNombre().equalsIgnoreCase(part[2])) {
+						for(Material m : materiales) {
+							if(m.getNombre().equalsIgnoreCase(part[0])) {
+								m.setPaisOrigen(paises.get(i));
+							}
+						}
+						
+					}
+				}
+				
+			}
+		}
+		Scanner archP2 = new Scanner(new File("Paises.txt"));
+		while(archP2.hasNextLine()) {
+			String [] separar = archP2.nextLine().split(",");
+			for(Pais p : paises) {
+				if(p.getNombre().equalsIgnoreCase(separar[0])) {
+					if(separar[1].equalsIgnoreCase("pieza")) {
+						for(Pieza pieza : piezas) {
+							if(pieza.getCodigo().equals(separar[3])) {
+								p.setPieza(pieza);
+								break;
+							}
+						}
+						
+					}
+					else if(separar[1].equalsIgnoreCase("arma")){
+						for(Arma a : armas) {
+							if(a.getCodigo().equals(separar[3])) {
+								p.setArma(a);
+							}
+						}
+					}
 				}
 			}
-			
 		}
-		archPa.close();
 	}
 	
 	//
@@ -559,11 +596,11 @@ public class SistemaImpl implements Sistema{
 		System.out.println("-----------------------");
 		System.out.println("Piezas: ");
 		for(Pieza p : piezas) {
-			System.out.println(p.toString());
+			System.out.println(p.getNombre());
 		}
 		System.out.println("Armas: ");
 		for(Arma a : armas) {
-			System.out.println(a.toString());
+			System.out.println(a.getNombre());
 		}
 		System.out.println("-----------------------");
 	}

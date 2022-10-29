@@ -1,1 +1,3 @@
 Japón,pieza,10,00001,Diamante
+Chile,arma,10,00002,Titanio
+USA,arma,20,00003,Cobre

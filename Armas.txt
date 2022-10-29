@@ -1,1 +1,2 @@
 metralleta circular,00002,1000,Chile,1000
+UAV,00003,5050,USA,500

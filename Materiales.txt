@@ -1,1 +1,3 @@
 Cobre,10000,Chile
+Diamante,100000,USA
+Titanio,50000,Japón

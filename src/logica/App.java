@@ -24,11 +24,11 @@ public class App {
 	}
 	
 	public static void lectura(Sistema sistema) throws FileNotFoundException {	
-		sistema.leerPersonas();
 		sistema.leerMateriales();
 		sistema.leerPiezas();
 		sistema.leerArmas();
 		sistema.leerPaises();
+		sistema.leerPersonas();
 		sistema.leerRobots();
 	}
 	
@@ -121,9 +121,11 @@ public class App {
 						sistema.mostrarPaises();
 						break;
 					case "13":
-						
+						agregarPiezas(sistema);
+						break;
 					case "14":
-						
+						agregarStockMateriales(sistema);
+						break;
 					case "15":
 						sistema.mostrarPiezasArmas();
 						break;
@@ -177,5 +179,23 @@ public class App {
 		String respuesta = scan1.nextLine();
 		
 		sistema.buscarMaterial(respuesta);
+	}
+	
+	//13)
+	public static void agregarPiezas(Sistema sistema) {
+		Scanner scan1 = new Scanner(System.in);
+		System.out.print("Ingrese nombre de un Pais: ");
+		String respuesta = scan1.nextLine();
+		
+		sistema.anadirStockP(respuesta);
+	}
+	
+	//14)
+	public static void agregarStockMateriales(Sistema sistema) {
+		Scanner scan1 = new Scanner(System.in);
+		System.out.print("Ingrese nombre de un Material para agregar mas stock: ");
+		String respuesta = scan1.nextLine();
+		
+		sistema.anadirStockM(respuesta);
 	}
 }
