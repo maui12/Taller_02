@@ -1,3 +1,4 @@
 Pablo,123456,piloto,GX
 Manuel,6893129,ensamblador,GX
 Roberto,9999999,admin,ADMINISTRACION
+a,a,admin,ADMINISTRACION

@@ -1,4 +1,4 @@
-package utils;
+package dominio;
 
 public class Persona {
 	
@@ -13,9 +13,7 @@ public class Persona {
 		this.especialidad = especialidad;
 		equipo = null;
 	}
-	
-	
-	
+
 	//------
 
 	public String getNombre() {
@@ -48,6 +46,12 @@ public class Persona {
 
 	public void setEquipo(Equipo equipo) {
 		this.equipo = equipo;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", identificacion=" + identificacion + ", especialidad=" + especialidad
+				+ ", equipo=" + equipo.getNombre() + "]";
 	}
 	
 	

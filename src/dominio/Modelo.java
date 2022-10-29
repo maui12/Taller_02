@@ -1,7 +1,7 @@
-package utils;
+package dominio;
 
 public class Modelo {
-
+	
 	private String codigo;
 	private String robot;
 	

@@ -1,1 +1,1 @@
-Japón, pieza, 10, 00001, Diamante
+Japón,pieza,10,00001,Diamante

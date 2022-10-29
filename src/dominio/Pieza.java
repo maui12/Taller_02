@@ -1,4 +1,4 @@
-package utils;
+package dominio;
 
 public class Pieza {
 

@@ -1,7 +1,9 @@
-package utils;
+package logica;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+
+import dominio.Persona;
 
 public interface Sistema {
 	
@@ -17,7 +19,7 @@ public interface Sistema {
 	
 	public void leerRobots() throws FileNotFoundException;
 	
-	public boolean acceder(String nombre, String id);
+	public int acceder(String nombre, String id);
 	
 	public void ingresarPiezaOArma(String elemento);
 	
