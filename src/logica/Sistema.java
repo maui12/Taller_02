@@ -71,7 +71,7 @@ public interface Sistema {
 	 */
 	public Persona anadirPersona(String id);
 	/**
-	 * Looks for a certain piece's type and shows all the countries with the avalaible pieces.
+	 * Looks for a certain piece's type and shows all the countries with the available pieces.
 	 * @param tipo
 	 */
 	public void buscarTipo(String tipo);
