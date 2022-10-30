@@ -17,6 +17,15 @@ public class Equipo {
 		integrantes.add(p);
 	}
 	
+	public Persona getPiloto() {
+		for(Persona p : integrantes) {
+			if(p.getEspecialidad().equalsIgnoreCase("piloto")) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	//------
 
 	public String getNombre() {

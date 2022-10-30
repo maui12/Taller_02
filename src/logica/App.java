@@ -91,7 +91,8 @@ public class App {
 						ingresarPiezaoArma(sistema);
 						break;
 					case "2":
-						
+						sistema.ensamblarRobot();
+						break;
 					case "3":
 						sistema.crearEquipo();
 						break;
@@ -102,9 +103,11 @@ public class App {
 						buscarMaterialPorNombre(sistema);
 						break;
 					case "6":
-						
+						sistema.crearModelo();
+						break;
 					case "7":
-						
+						revisarRobot(sistema);
+						break;
 					case "8":
 						sistema.mostrarPersonas();
 						break;
@@ -180,6 +183,15 @@ public class App {
 		String respuesta = scan1.nextLine();
 		
 		sistema.buscarMaterial(respuesta);
+	}
+	
+	//7)
+	public static void revisarRobot(Sistema sistema) {
+		Scanner scan1 = new Scanner(System.in);
+		System.out.print("Ingrese nombre del Robot a revisar: ");
+		String respuesta = scan1.nextLine();
+		
+		sistema.revisarPiezas(respuesta);
 	}
 	
 	//13)

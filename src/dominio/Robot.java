@@ -31,6 +31,20 @@ public class Robot {
 			}
 		}
 	}
+	
+	public void reemplazarPieza(Pieza antigua,Pieza nueva) {
+		for(int i = 0 ; i < piezas.size() ; i++) {
+			if(antigua.getNombre().equals(piezas.get(i).getNombre())) {
+				piezas.add(i, nueva);
+				piezas.remove(i+1);
+				System.out.println("-------------------------------");
+				System.out.println("Cambio realizado exitosamente.");
+				System.out.println("-------------------------------");
+				return;
+			}
+		}
+	}
+	
 
 	public String getNombre() {
 		return nombre;

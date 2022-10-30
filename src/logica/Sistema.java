@@ -57,6 +57,8 @@ public interface Sistema {
 	/**
 	 * Creates a new team.
 	 */
+	public void ensamblarRobot();
+	
 	public void crearEquipo();
 	/**
 	 * Verifies if a certain person exist inside the database.

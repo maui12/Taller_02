@@ -300,8 +300,19 @@ public class SistemaImpl implements Sistema{
 	}
 	
 	//2)
-	public void ensamblarRobot(String tipo) {
+	public void ensamblarRobot() {
 		Scanner ens = new Scanner(System.in);
+		System.out.println("============================");
+		System.out.println("Ensamblado de un nuevo robot");
+		System.out.println("============================");
+		System.out.println("Ingrese el nombre del nuevo robot:");
+		Robot robotNuevo = new Robot(ens.nextLine());
+		for(int i = 0; i < 5; i++) {
+			robotNuevo.getPiezas().add(null);
+		}
+		System.out.println(" ");
+		System.out.println("Eliga una Cabeza para el robot: ");
+		System.out.println("---------------------");
 		System.out.println("* Piezas tipo CABEZA *");
 		for(Pieza p : piezas) {
 			if(p.getTipo().equals("cabeza")) {
@@ -309,6 +320,93 @@ public class SistemaImpl implements Sistema{
 			}
 		}
 		System.out.print(" - Ingrese código de pieza: ");
+		robotNuevo.getPiezas().set(3, buscarPiezaPorCodigo(ens.nextLine()));
+		
+		
+		System.out.println("Eliga un Torax para el robot: ");
+		System.out.println("---------------------");
+		System.out.println("* Piezas tipo TORAX *");
+		for(Pieza p : piezas) {
+			if(p.getTipo().equals("torax")) {
+				System.out.println(p.toString());
+			}
+		}
+		System.out.print(" - Ingrese código de pieza: ");
+		robotNuevo.getPiezas().set(2, buscarPiezaPorCodigo(ens.nextLine()));
+		
+		
+		System.out.println("Eliga unos Brazos para el robot: ");
+		System.out.println("---------------------");
+		System.out.println("* Piezas tipo BRAZO *");
+		for(Pieza p : piezas) {
+			if(p.getTipo().equals("brazos")) {
+				System.out.println(p.toString());
+			}
+		}
+		System.out.print(" - Ingrese código de pieza: ");
+		robotNuevo.getPiezas().set(0, buscarPiezaPorCodigo(ens.nextLine()));
+		
+		
+		System.out.println("Eliga unas Piernas para el robot: ");
+		System.out.println("---------------------");
+		System.out.println("* Piezas tipo PIERNAS *");
+		for(Pieza p : piezas) {
+			if(p.getTipo().equals("piernas")) {
+				System.out.println(p.toString());
+			}
+		}
+		System.out.print(" - Ingrese código de pieza: ");
+		robotNuevo.getPiezas().set(1, buscarPiezaPorCodigo(ens.nextLine()));
+		
+		
+		System.out.println("¿Desea agregar una cualidad extra?(Si/No): ");
+		String resp = ens.nextLine();
+		
+		if(resp.equalsIgnoreCase("si")) {
+			System.out.println("Eliga una Cualidad para el robot: ");
+			System.out.println("---------------------");
+			System.out.println("* Piezas tipo CUALIDAD *");
+			for(Pieza p : piezas) {
+				if(p.getTipo().equals("cualidad")) {
+					System.out.println(p.toString());
+				}
+			}
+			System.out.print(" - Ingrese código de pieza: ");
+			robotNuevo.getPiezas().set(4, buscarPiezaPorCodigo(ens.nextLine()));
+		}
+		System.out.println("-----------------");
+		System.out.println("Equipos disponibles");
+		for(Equipo e : equipos) {
+			System.out.println(e.getNombre());
+		}
+		System.out.println("¿Que equipo se encargara del robot?: ");
+		String resp1 = ens.nextLine();
+		
+		robotNuevo.setEquipo(buscarEquipoPorNombre(resp1));
+		robotNuevo.setPiloto(buscarEquipoPorNombre(resp1).getPiloto());
+		robots.add(robotNuevo);
+		System.out.println("------------------------");
+		System.out.println("Robot creado con exito.");
+		System.out.println("------------------------");
+		
+	}
+	
+	public Pieza buscarPiezaPorCodigo(String codigo) {
+		for(Pieza p: piezas) {
+			if(p.getCodigo().equals(codigo)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	public Equipo buscarEquipoPorNombre(String nombre) {
+		for(Equipo e : equipos) {
+			if(e.getNombre().equals(nombre)) {
+				return e;
+			}
+		}
+		return null;
 	}
 	
 	//3)
@@ -437,25 +535,138 @@ public class SistemaImpl implements Sistema{
 	}
 	
 	//7)
-	//falta terminar
 	public void revisarPiezas(String robot) {
-		for(Robot r : robots) {
-			if(r.getNombre().equals(robot)) {
-				for(Pieza p : r.getPiezas()) {
-					if(!r.getPiezas().get(0).getTipo().equals("brazos")) {
-						System.out.println("Pieza erronea, la 1ra pieza debe ser de tipo brazos.");
+			int cont = 0;
+			for(Robot r : robots) {
+				if(r.getNombre().equals(robot)) {
+					cont++;
+						for(int i = 0; i < r.getPiezas().size() ; i++) {
+							if(!r.getPiezas().get(0).getTipo().equals("brazos")) {
+								System.out.println("Pieza erronea, la 1ra pieza debe ser de tipo brazos.");
+								cambiarPieza("brazos", r);
+							}
+							if(!r.getPiezas().get(1).getTipo().equals("piernas")) {
+								System.out.println("Pieza erronea, la 2da pieza debe ser de tipo piernas.");
+								cambiarPieza("piernas", r);
+							}
+							if(!r.getPiezas().get(2).getTipo().equals("torax")) {
+								System.out.println("Pieza erronea, la 3ra pieza debe ser de tipo tórax.");
+								cambiarPieza("torax", r);
+							}
+							if(!r.getPiezas().get(3).getTipo().equals("cabeza")) {
+								System.out.println("Pieza erronea, la 4ta pieza debe ser de tipo cabeza.");
+								cambiarPieza("cabeza", r);
+							}
+							if(r.getPiezas().get(4) != null) {
+								if(!r.getPiezas().get(4).getTipo().equals("cualidad")) {
+									System.out.println("Pieza erronea, la 5ta pieza debe ser de tipo cualidad extra.");
+									cambiarPieza("cualidad", r);
+								}
+							}
+						}
+						System.out.println("===================================");
+						System.out.println("No se encontraron piezas erroneas.");
+						System.out.println("===================================");
+				}
+			}
+			if(cont == 0) {
+				System.out.println("Robot no encontrado.");
+			}
+	}
+	
+	public void cambiarPieza(String pieza,Robot robot) {
+		Scanner scan = new Scanner(System.in);
+		if(pieza.equalsIgnoreCase("brazos")) {
+			System.out.println("Piezas del tipo Brazos disponibles:");
+			for(Pieza p: piezas) {
+				if(p.getTipo().equals(pieza)) {
+					System.out.println(p.toString());
+				}
+			}
+			System.out.println("Ingrese el codigo de la pieza a cambiar:");
+			String respuesta = scan.nextLine();
+			for(Pieza p : piezas) {
+				if(p.getCodigo().equals(respuesta)) {
+					for(Robot r1 : robots) {
+						if(r1.getNombre().equals(robot.getNombre())) {
+							r1.reemplazarPieza(robot.getPiezas().get(0), p);
+						}
 					}
-					if(!r.getPiezas().get(1).getTipo().equals("piernas")) {
-						System.out.println("Pieza erronea, la 2da pieza debe ser de tipo piernas.");
+				}
+			}
+		}
+		if(pieza.equalsIgnoreCase("piernas")) {
+			System.out.println("Piezas del tipo Piernas disponibles:");
+			for(Pieza p: piezas) {
+				if(p.getTipo().equals(pieza)) {
+					System.out.println(p.toString());
+				}
+			}
+			System.out.println("Ingrese el codigo de la pieza a cambiar:");
+			String respuesta = scan.nextLine();
+			for(Pieza p : piezas) {
+				if(p.getCodigo().equals(respuesta)) {
+					for(Robot r1 : robots) {
+						if(r1.getNombre().equals(robot.getNombre())) {
+							r1.reemplazarPieza(robot.getPiezas().get(1), p);
+						}
 					}
-					if(!r.getPiezas().get(2).getTipo().equals("torax")) {
-						System.out.println("Pieza erronea, la 3ra pieza debe ser de tipo tórax.");
+				}
+			}
+		}
+		if(pieza.equalsIgnoreCase("cabeza")) {
+			System.out.println("Piezas del tipo Cabeza disponibles:");
+			for(Pieza p: piezas) {
+				if(p.getTipo().equals(pieza)) {
+					System.out.println(p.toString());
+				}
+			}
+			System.out.println("Ingrese el codigo de la pieza a cambiar:");
+			String respuesta = scan.nextLine();
+			for(Pieza p : piezas) {
+				if(p.getCodigo().equals(respuesta)) {
+					for(Robot r1 : robots) {
+						if(r1.getNombre().equals(robot.getNombre())) {
+							r1.reemplazarPieza(robot.getPiezas().get(3), p);
+						}
 					}
-					if(!r.getPiezas().get(3).getTipo().equals("cabeza")) {
-						System.out.println("Pieza erronea, la 4ta pieza debe ser de tipo cabeza.");
+				}
+			}
+		}
+		if(pieza.equalsIgnoreCase("torax")) {
+			System.out.println("Piezas del tipo Torax disponibles:");
+			for(Pieza p: piezas) {
+				if(p.getTipo().equals(pieza)) {
+					System.out.println(p.toString());
+				}
+			}
+			System.out.println("Ingrese el codigo de la pieza a cambiar:");
+			String respuesta = scan.nextLine();
+			for(Pieza p : piezas) {
+				if(p.getCodigo().equals(respuesta)) {
+					for(Robot r1 : robots) {
+						if(r1.getNombre().equals(robot.getNombre())) {
+							r1.reemplazarPieza(robot.getPiezas().get(2), p);
+						}
 					}
-					if(!r.getPiezas().get(4).getTipo().equals("cualidad extra")) {
-						System.out.println("Pieza erronea, la 5ta pieza debe ser de tipo cualidad extra.");
+				}
+			}
+		}
+		if(pieza.equalsIgnoreCase("cualidad")) {
+			System.out.println("Piezas del tipo Cualidad disponibles:");
+			for(Pieza p: piezas) {
+				if(p.getTipo().equals(pieza)) {
+					System.out.println(p.toString());
+				}
+			}
+			System.out.println("Ingrese el codigo de la pieza a cambiar:");
+			String respuesta = scan.nextLine();
+			for(Pieza p : piezas) {
+				if(p.getCodigo().equals(respuesta)) {
+					for(Robot r1 : robots) {
+						if(r1.getNombre().equals(robot.getNombre())) {
+							r1.reemplazarPieza(robot.getPiezas().get(4), p);
+						}
 					}
 				}
 			}
@@ -510,14 +721,23 @@ public class SistemaImpl implements Sistema{
 			System.out.println("-Equipo: " + r.getEquipo().getNombre());
 			System.out.println("-Piloto: " + r.getPiloto().getNombre());
 			System.out.println("-Piezas: ");
-			for(int i = 0; i < r.getPiezas().size(); i++) {
+			for(int i = 0; i < r.getPiezas().size()-1; i++) {
 					System.out.println("	*Nombre: " + r.getPiezas().get(i).getNombre());
 					System.out.println("	*Codigo: " + r.getPiezas().get(i).getCodigo());					
 					System.out.println("	*Pais de origen: " + r.getPiezas().get(i).getPaisOrigen().getNombre());
 					System.out.println("-----------------------");		
 			}
+			if(r.getPiezas().get(4) == null) {
+				System.out.println("Este robot no tiene cualidad extra.");
+				System.out.println("====================");
+			}
+			else {
+				System.out.println("	*Nombre: " + r.getPiezas().get(4).getNombre());
+				System.out.println("	*Codigo: " + r.getPiezas().get(4).getCodigo());					
+				System.out.println("	*Pais de origen: " + r.getPiezas().get(4).getPaisOrigen().getNombre());
+				System.out.println("====================");
+			}
 		}
-		System.out.println("-----------------------");
 	}
 
 	//11)
@@ -596,11 +816,11 @@ public class SistemaImpl implements Sistema{
 		System.out.println("-----------------------");
 		System.out.println("Piezas: ");
 		for(Pieza p : piezas) {
-			System.out.println(p.getNombre());
+			System.out.println(p.toString());
 		}
 		System.out.println("Armas: ");
 		for(Arma a : armas) {
-			System.out.println(a.getNombre());
+			System.out.println(a.toString());
 		}
 		System.out.println("-----------------------");
 	}

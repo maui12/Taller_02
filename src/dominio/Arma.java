@@ -78,9 +78,9 @@ public class Arma {
 
 	@Override
 	public String toString() {
-		return "Arma [nombre=" + nombre + ", codigo=" + codigo + ", municion=" + municion + ", paisOrigen=" + paisOrigen
+		return "Arma [nombre=" + nombre + ", codigo=" + codigo + ", municion=" + municion + ", paisOrigen=" + paisOrigen.getNombre()
 				+ ", cantidadProducida=" + cantidadProducida + ", cantidadMaterial=" + cantidadMaterial + ", material="
-				+ material + "]";
+				+ material.getNombre() + "]";
 	}
 	
 	

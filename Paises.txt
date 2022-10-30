@@ -3,3 +3,7 @@ Chile,arma,10,00002,Titanio
 USA,arma,20,00003,Cobre
 Alemania,pieza,40,00004,Cobre
 Noruega,pieza,15,00005,Hielo
+Alemania,pieza,10,00006,Acero
+Brasil,pieza,24,00007,Esmeralda
+Argentina,pieza,30,00008,Mitrilo
+USA,pieza,43,00009,Titanio
