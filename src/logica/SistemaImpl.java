@@ -1,7 +1,9 @@
 package logica;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -916,16 +918,129 @@ public class SistemaImpl implements Sistema{
 		}	
 	}
 	
-	public void destruirTodo() {
+	public void destruirTodo() throws IOException{
+		Scanner des = new Scanner(System.in);
+		System.out.println("---------------------------");
+		System.out.print("¿Está seguro?\n1) Sí\n2) No\nSu opción: ");
+		int op = Integer.parseInt(des.nextLine());
+		if(op==1) {
+			modelos.clear();
+			personas.clear();
+			equipos.clear();
+			piezas.clear();
+			armas.clear();
+			materiales.clear();
+			paises.clear();
+			robots.clear();
+			cerrarSistema();
+			System.out.println("Destrucción completa.");
+			System.out.println("---------------------------");
+		}else {
+			System.out.println("No se hizo nada.");
+			System.out.println("---------------------------");
+		}
 		
 	}
 	
-	public void cerrarSistema() {
+	public void cerrarSistema() throws IOException{
+		System.out.println("Cerrando sistema...");
+		BufferedWriter archPe = new BufferedWriter(new FileWriter("Personas.txt"));
+		if(!personas.isEmpty()) {
+			for(Persona p : personas) {
+				String linea = p.getNombre()+","+p.getIdentificacion()+","+p.getEspecialidad()+","+p.getEquipo().getNombre()+"\n";
+				archPe.write(linea);
+			}
+		}else {
+			archPe.write("");
+		}
+		archPe.close();
 		
+		BufferedWriter archM = new BufferedWriter(new FileWriter("Materiales.txt"));
+		if(!materiales.isEmpty()) {
+			for(Material m : materiales) {
+				String linea = m.getNombre()+","+m.getStock()+","+m.getPaisOrigen().getNombre()+"\n";
+				archM.write(linea);
+			}
+		}else {
+			archM.write("");
+		}
+		archM.close();
+		
+		BufferedWriter archPa = new BufferedWriter(new FileWriter("Paises.txt"));
+		if(!paises.isEmpty()) {
+			for(Pais p : paises) {
+				String linea = p.getNombre()+",";
+				if(p.getArma()!=null) {
+					linea += "arma"+","+p.getArma().getCantidadProducida()+","+p.getArma().getCodigo()+","+p.getArma().getMaterial().getNombre()+"\n";
+				}else {
+					linea += "pieza"+","+p.getPieza().getCantidadProducida()+","+p.getPieza().getCodigo()+","+p.getPieza().getMaterial().getNombre()+"\n";
+				}
+				archPa.write(linea);
+			}
+		}else {
+			archPa.write("");
+		}
+		archPa.close();
+		
+		BufferedWriter archPi = new BufferedWriter(new FileWriter("Piezas.txt"));
+		if(!piezas.isEmpty()) {
+			for(Pieza p : piezas) {
+				String linea = p.getNombre()+","+p.getCodigo()+","+p.getTipo()+","+p.getPaisOrigen().getNombre()+","+p.getCantidadMaterial()+"\n";
+				archPi.write(linea);
+			}
+		}else {
+			archPi.write("");
+		}
+		archPi.close();
+		
+		BufferedWriter archA = new BufferedWriter(new FileWriter("Armas.txt"));
+		if(!armas.isEmpty()) {
+			for(Arma a : armas) {
+				String linea = a.getNombre()+","+a.getCodigo()+","+a.getMunicion()+","+a.getPaisOrigen().getNombre()+","+a.getCantidadMaterial()+"\n";
+				archA.write(linea);
+			}
+		}else {
+			archA.write("");
+		}
+		archA.close();
+		
+		BufferedWriter archR = new BufferedWriter(new FileWriter("robots.txt"));
+		if(!robots.isEmpty()) {
+			for(Robot r : robots) {
+				String linea = r.getNombre()+",";
+				for(Pieza p : r.getPiezas()) {
+					linea += p.getNombre()+",";
+				}
+				linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
+				archR.write(linea);
+			}
+		}else {
+			archR.write("");
+		}
+		archR.close();
+		
+		crearArchModelos();
+		
+		BufferedWriter archMo = new BufferedWriter(new FileWriter("modelos.txt"));
+		if(!modelos.isEmpty()) {
+			for(Modelo m : modelos) {
+				String linea = m.getCodigo()+","+m.getRobot()+"\n";
+				archMo.write(linea);
+			}
+		}else {
+			archMo.write("");
+		}
+		archMo.close();
+		
+		System.out.println("SISTEMA CERRADO.");
 	}
 	
-	public boolean crearArchModelos() {
-		return false;
+	public void crearArchModelos() throws IOException {
+		String ruta = "modelos.txt";
+		File arch = new File(ruta);
+		if(!arch.exists()) {
+			arch.createNewFile();
+		}	
 	}
 	
 	public boolean verificarEquipo(String equipo) {

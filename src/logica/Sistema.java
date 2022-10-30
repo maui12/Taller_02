@@ -1,6 +1,7 @@
 package logica;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import dominio.Persona;
@@ -138,16 +139,15 @@ public interface Sistema {
 	/**
 	 * Destroys all the current information in the database.
 	 */
-	public void destruirTodo();
+	public void destruirTodo() throws IOException;
 	/**
 	 * Closes the system and saves all the information.
 	 */
-	public void cerrarSistema();
+	public void cerrarSistema() throws IOException;
 	/**
 	 * Creates a new Models's text file.
-	 * @return true or false, depending if the text file already exists or not.
 	 */
-	public boolean crearArchModelos();
+	public void crearArchModelos() throws IOException;
 	/**
 	 * Verifies if a certain team exist in the database.
 	 * @param equipo

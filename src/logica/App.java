@@ -2,6 +2,7 @@ package logica;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ import dominio.Robot;
 //Mauricio Diaz 21.227.728-2
 public class App {
 	
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		
 		Sistema sistema = new SistemaImpl();		
 		
@@ -23,6 +24,11 @@ public class App {
 		menu(sistema,verificarAcceso(sistema));	
 	}
 	
+	/**
+	 * Reads the text files and saves the information from the system.
+	 * @param sistema
+	 * @throws FileNotFoundException
+	 */
 	public static void lectura(Sistema sistema) throws FileNotFoundException {	
 		sistema.leerMateriales();
 		sistema.leerPiezas();
@@ -34,6 +40,11 @@ public class App {
 	
 	//---------------
 	
+	/**
+	 * Checks the access to the system. 
+	 * @param sistema
+	 * @return a number, depending who is trying to access the system.
+	 */
 	public static int verificarAcceso(Sistema sistema) {
 		Scanner scan = new Scanner(System.in);
 		
@@ -58,8 +69,13 @@ public class App {
 			}
 		}
 	}
-	
-	public static void menu(Sistema sistema,int verificacion) {
+	/**
+	 * Runs the main menu of the system.
+	 * @param sistema
+	 * @param verificacion
+	 * @throws IOException
+	 */
+	public static void menu(Sistema sistema,int verificacion) throws IOException{
 		Scanner scan = new Scanner(System.in);
 		//Menu normal
 		if(verificacion == 0) {
@@ -83,6 +99,7 @@ public class App {
 				System.out.println("14) Añadir stock Materiales");
 				System.out.println("15) Mostrar todas las Piezas y armas");
 				System.out.println("16) Cambiar piezas");
+				System.out.println("17) Salir");
 				System.out.println("------------------------");
 				
 				String respuesta = scan.nextLine();
@@ -135,7 +152,12 @@ public class App {
 					case "16":
 						cambiarPiezasDeRobot(sistema);
 						break;
-						
+					case "17":
+						sistema.cerrarSistema();
+						break;
+					default:
+						System.out.println("Opción no válida.");	
+						break;
 				}
 			}
 		}
@@ -153,7 +175,8 @@ public class App {
 					sistema.activarRecursoNuclear();
 					break;
 				case "2":
-					
+					sistema.destruirTodo();
+					break;
 			}
 		}
 	}
@@ -177,6 +200,10 @@ public class App {
 	}
 	
 	//5)
+	/**
+	 * Looks for a certain material and shows the country that produces it with the available stock from the system.
+	 * @param sistema
+	 */
 	public static void buscarMaterialPorNombre(Sistema sistema) {
 		Scanner scan1 = new Scanner(System.in);
 		System.out.print("Ingrese nombre del Material a buscar: ");
@@ -186,6 +213,10 @@ public class App {
 	}
 	
 	//7)
+	/**
+	 * Checks if the entered robot has its parts incorrectly associated from the system.
+	 * @param sistema
+	 */
 	public static void revisarRobot(Sistema sistema) {
 		Scanner scan1 = new Scanner(System.in);
 		System.out.print("Ingrese nombre del Robot a revisar: ");
@@ -195,6 +226,10 @@ public class App {
 	}
 	
 	//13)
+	/**
+	 * Adds stock to the piece of a certain country from the system.
+	 * @param sistema
+	 */
 	public static void agregarPiezas(Sistema sistema) {
 		Scanner scan1 = new Scanner(System.in);
 		System.out.print("Ingrese nombre de un Pais: ");
@@ -204,6 +239,10 @@ public class App {
 	}
 	
 	//14)
+	/**
+	 * Adds stock to the material of a certain country from the system.
+	 * @param sistema
+	 */
 	public static void agregarStockMateriales(Sistema sistema) {
 		Scanner scan1 = new Scanner(System.in);
 		System.out.print("Ingrese nombre de un Material para agregar mas stock: ");
@@ -212,6 +251,10 @@ public class App {
 		sistema.anadirStockM(respuesta);
 	}
 	//15)
+	/**
+	 * Allows to change the pieces of a certain robot from the system.
+	 * @param sistema
+	 */
 	public static void cambiarPiezasDeRobot(Sistema sistema) {
 		Scanner scan1 = new Scanner(System.in);
 		System.out.print("Ingrese nombre de un Robot para cambiar sus piezas: ");
