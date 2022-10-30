@@ -159,6 +159,9 @@ public class App {
 						System.out.println("Opción no válida.");	
 						break;
 				}
+				if(respuesta.equals("17")) {
+					break;
+				}
 			}
 		}
 		
