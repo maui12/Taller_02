@@ -51,14 +51,11 @@ public interface Sistema {
 	public void ingresarPiezaOArma(String elemento);
 	/**
 	 * Assembles a robot, associating a team and a pilot.
-	 * @param tipo
-	 */
-	public void ensamblarRobot(String tipo);
-	/**
-	 * Creates a new team.
 	 */
 	public void ensamblarRobot();
-	
+	/**
+	 * Creates a new team.
+	 */	
 	public void crearEquipo();
 	/**
 	 * Verifies if a certain person exist inside the database.
