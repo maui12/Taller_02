@@ -41,9 +41,9 @@ public interface Sistema {
 	 * Allows the user to access the system.
 	 * @param nombre
 	 * @param id
-	 * @return true or false, depending of who is trying to access.
+	 * @return a number, depending of who is trying to access.
 	 */
-	public boolean acceder(String nombre, String id);
+	public int acceder(String nombre, String id);
 	/**
 	 * Creates a new piece or weapon with all their features.
 	 * @param elemento
