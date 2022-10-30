@@ -185,6 +185,10 @@ public class App {
 	}
 	
 	//1)
+	/**
+	 * Creates a new piece or weapon with all their features from the system.
+	 * @param sistema
+	 */
 	public static void ingresarPiezaoArma(Sistema sistema) {
 		Scanner scan1 = new Scanner(System.in);
 		System.out.print("Desea ingresar una Pieza o una Arma?: ");
@@ -194,6 +198,10 @@ public class App {
 	}
 	
 	//4)
+	/**
+	 * Looks for a certain piece's type and shows all the countries with the available pieces from the system.
+	 * @param sistema
+	 */
 	public static void buscarPiezaPorTipo(Sistema sistema) {
 		Scanner scan1 = new Scanner(System.in);
 		System.out.print("Ingrese tipo de Pieza a buscar: ");
