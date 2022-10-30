@@ -5,3 +5,4 @@ Hielo,1000000,Noruega
 Acero,900000,Brasil
 Esmeralda,70000,Alemania
 Mitrilo,650000,Argentina
+Bronce,9090,Francia

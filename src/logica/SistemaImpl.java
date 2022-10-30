@@ -169,7 +169,10 @@ public class SistemaImpl implements Sistema{
 			for(int i=1; i<6; i++) {
 				try {
 					for(Pieza p : piezas) {
-						if(p.getNombre().equals(partes[i])) {
+						if(partes[i].equals("sin cualidad")) {
+							robot.getPiezas().add(null);
+						}
+						else if(p.getNombre().equals(partes[i])) {
 							robot.getPiezas().add(p);
 						}
 					}
@@ -376,6 +379,16 @@ public class SistemaImpl implements Sistema{
 			System.out.print(" - Ingrese código de pieza: ");
 			robotNuevo.getPiezas().set(4, buscarPiezaPorCodigo(ens.nextLine()));
 		}
+		
+		System.out.println("Eliga una Arma para el robot: ");
+		System.out.println("---------------------");
+		System.out.println("* Armas disponibles *");
+		for(Arma a : armas) {
+			System.out.println(a.toString());
+		}
+		System.out.print(" - Ingrese código de pieza: ");
+		robotNuevo.setArma(buscarArmaPorCodigo(ens.nextLine()));
+		
 		System.out.println("-----------------");
 		System.out.println("Equipos disponibles");
 		for(Equipo e : equipos) {
@@ -406,6 +419,15 @@ public class SistemaImpl implements Sistema{
 		for(Equipo e : equipos) {
 			if(e.getNombre().equals(nombre)) {
 				return e;
+			}
+		}
+		return null;
+	}
+	
+	public Arma buscarArmaPorCodigo(String codigo) {
+		for(Arma a : armas) {
+			if(a.getCodigo().equals(codigo)) {
+				return a;
 			}
 		}
 		return null;
@@ -723,7 +745,7 @@ public class SistemaImpl implements Sistema{
 			System.out.println("-Equipo: " + r.getEquipo().getNombre());
 			System.out.println("-Piloto: " + r.getPiloto().getNombre());
 			System.out.println("-Piezas: ");
-			for(int i = 0; i < r.getPiezas().size()-1; i++) {
+			for(int i = 0; i < 4; i++) {
 					System.out.println("	*Nombre: " + r.getPiezas().get(i).getNombre());
 					System.out.println("	*Codigo: " + r.getPiezas().get(i).getCodigo());					
 					System.out.println("	*Pais de origen: " + r.getPiezas().get(i).getPaisOrigen().getNombre());
@@ -1008,11 +1030,25 @@ public class SistemaImpl implements Sistema{
 		if(!robots.isEmpty()) {
 			for(Robot r : robots) {
 				String linea = r.getNombre()+",";
-				for(Pieza p : r.getPiezas()) {
-					linea += p.getNombre()+",";
+				if(r.getPiezas().get(4) != null) {
+					for(Pieza p : r.getPiezas()) {
+						linea += p.getNombre()+",";
+					}
+					linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
+					archR.write(linea);
 				}
-				linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
-				archR.write(linea);
+				else {
+					for(int i = 0; i < r.getPiezas().size(); i++) {
+						if(i==4) {
+							linea += "sin cualidad,";
+						}
+						else {
+							linea += r.getPiezas().get(i).getNombre()+",";
+						}
+					}
+					linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
+					archR.write(linea);
+				}
 			}
 		}else {
 			archR.write("");
