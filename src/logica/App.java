@@ -13,6 +13,7 @@ import dominio.Robot;
 
 //
 //Mauricio Diaz 21.227.728-2
+//Carolina Torres 20.036.467-8
 public class App {
 	
 	public static void main(String[] args) throws IOException {
