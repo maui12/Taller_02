@@ -1,6 +1,6 @@
 Japón,pieza,14,00001,Diamante
-Chile,arma,10,00002,Titanio
-USA,arma,20,00003,Cobre
+Chile,arma,10,00002,Cobre
+USA,arma,20,00003,Titanio
 Alemania,pieza,10,00004,Acero
 Noruega,pieza,15,00005,Hielo
 Brasil,pieza,24,00007,Esmeralda

@@ -1,6 +1,6 @@
 Cobre,10000,Chile
-Diamante,100000,USA
-Titanio,50000,Japón
+Diamante,100000,Japón
+Titanio,50000,USA
 Hielo,1000000,Noruega
 Acero,900000,Brasil
 Esmeralda,70000,Alemania
