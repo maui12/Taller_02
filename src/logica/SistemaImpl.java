@@ -154,9 +154,15 @@ public class SistemaImpl implements Sistema{
 			Equipo equipo = new Equipo(partes[3]);
 			if(!verificarEquipo(partes[3])) {
 				equipos.add(equipo);
+				equipo.agregarPersona(persona);
+			}else {
+				for(Equipo e : equipos) {
+					if(e.getNombre().equals(partes[3])) {
+						e.agregarPersona(persona);
+					}
+				}
 			}
 			persona.setEquipo(equipo);
-			equipo.agregarPersona(persona);
 		}
 		archPe.close();
 	}
@@ -447,11 +453,8 @@ public class SistemaImpl implements Sistema{
 			int piloto = 0;
 			int numPersonas = 0;
 			while(numPersonas<7) {
-				System.out.print("- Ingrese identificación de persona (ingrese 0 para salir): ");
+				System.out.print("- Ingrese identificación de persona: ");
 				String id = leerop.nextLine();
-				if(id.equals("0")) {
-					break;
-				}
 				if(!verificarPersona(id)) {
 					Persona p = anadirPersona(id);
 					if(p.getEspecialidad().toLowerCase().equals("piloto")) {
@@ -471,7 +474,6 @@ public class SistemaImpl implements Sistema{
 							System.out.println("Ya hay 5 ensambladores en su equipo.");
 						}
 					}
-					personas.add(p);
 				}else {
 					for(Persona p : personas) {
 						if(p.getIdentificacion().equals(id)) {
@@ -495,7 +497,7 @@ public class SistemaImpl implements Sistema{
 						}
 					}
 				}
-				numPersonas = piloto + ensam;
+				numPersonas ++;
 			}
 			equipos.add(e);
 			System.out.println("Equipo creado.");
@@ -1039,28 +1041,6 @@ public class SistemaImpl implements Sistema{
 				}
 				linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
 				archR.write(linea);
-				
-				/*
-				if(r.getPiezas().get(4) != null) {
-					for(Pieza p : r.getPiezas()) {
-						linea += p.getNombre()+",";
-					}
-					linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
-					archR.write(linea);
-				}
-				else {
-					for(int i = 0; i < r.getPiezas().size(); i++) {
-						if(i==4) {
-							linea += "sin cualidad,";
-						}
-						else {
-							System.out.println(r.getPiezas().get(i).getNombre());
-							linea += r.getPiezas().get(i).getNombre()+",";
-						}
-					}
-					linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
-					archR.write(linea);
-				}*/
 			}
 		}else {
 			archR.write("");
