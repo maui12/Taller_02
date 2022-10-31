@@ -1,3 +1,1 @@
-aaa,brazos fuertes,piernas de acero,armadura de warmog,casco samurai,alas de mitrilo,metralleta circular,GX,123456
-bbb,brazos fuertes,piernas de acero,armadura de warmog,casco vikingo,alas de mitrilo,UAV,GX,123456
-ggg,brazos fuertes,piernas de acero,armadura de warmog,casco samurai,sin cualidad,UAV,GX,123456
+DaiMekaizer,brazos fuertes,piernas de acero,casco gundam,casco samurai,alas de mitrilo,metralleta circular,GX,123456

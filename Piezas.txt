@@ -4,3 +4,4 @@ casco vikingo,00005,cabeza,Noruega,150
 armadura de warmog,00007,torax,Brasil,55
 alas de mitrilo,00008,cualidad,Argentina,92
 brazos fuertes,00009,brazos,Francia,80
+casco gundam,00010,torax,China,80

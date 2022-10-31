@@ -169,17 +169,19 @@ public class SistemaImpl implements Sistema{
 			for(int i=1; i<6; i++) {
 				try {
 					for(Pieza p : piezas) {
-						if(partes[i].equals("sin cualidad")) {
-							robot.getPiezas().add(null);
-						}
-						else if(p.getNombre().equals(partes[i])) {
+						if(p.getNombre().equals(partes[i])) {
 							robot.getPiezas().add(p);
+						}
+						if(partes[5].equals("sin cualidad")) {
+							robot.getPiezas().add(null);
 						}
 					}
 				}catch(NullPointerException e) {
 					e.printStackTrace();
 				}
 			}
+
+			
 			for(Arma a : armas) {
 				try {
 					if(a.getNombre().equals(partes[6])) {
@@ -524,10 +526,10 @@ public class SistemaImpl implements Sistema{
 	
 	//4)
 	public void buscarTipo(String tipo) {
-		for(Pais p : paises) {
-			if(p.getPieza().getTipo().equalsIgnoreCase(tipo)) {
-				if(p.getPieza().getCantidadProducida()>0) {
-					System.out.println(p.getNombre()+", Cantidad disponible: "+p.getPieza().getCantidadProducida());
+		for(Pieza p : piezas) {
+			if(p.getTipo().equals(tipo)) {
+				if(p.getCantidadProducida()>0) {
+					System.out.println(p.getPaisOrigen().getNombre()+", Cantidad disponible: "+p.getCantidadProducida());
 				}
 			}
 		}
@@ -548,8 +550,8 @@ public class SistemaImpl implements Sistema{
 	public void crearModelo() {
 		for(Robot r : robots) {
 			int suma = 0;
-			for(int i=0; i<5; i++) {
-				int cod = Integer.parseInt(r.getPiezas().get(i).getCodigo());
+			for(Pieza p : r.getPiezas()) {
+				int cod = Integer.parseInt(p.getCodigo());
 				suma += cod;
 			}
 			String codigo = Integer.toString(suma)+r.getEquipo().getNombre()+r.getPiloto().getNombre().charAt(0);
@@ -745,21 +747,18 @@ public class SistemaImpl implements Sistema{
 			System.out.println("-Equipo: " + r.getEquipo().getNombre());
 			System.out.println("-Piloto: " + r.getPiloto().getNombre());
 			System.out.println("-Piezas: ");
-			for(int i = 0; i < 4; i++) {
-					System.out.println("	*Nombre: " + r.getPiezas().get(i).getNombre());
-					System.out.println("	*Codigo: " + r.getPiezas().get(i).getCodigo());					
-					System.out.println("	*Pais de origen: " + r.getPiezas().get(i).getPaisOrigen().getNombre());
+			
+			for(Pieza p : r.getPiezas()) {
+				if(p!=null) {
+					System.out.println("	*Nombre: " + p.getNombre());
+					System.out.println("	*Codigo: " + p.getCodigo());					
+					System.out.println("	*Pais de origen: " + p.getPaisOrigen().getNombre());
 					System.out.println("-----------------------");		
-			}
-			if(r.getPiezas().get(4) == null) {
-				System.out.println("Este robot no tiene cualidad extra.");
-				System.out.println("====================");
-			}
-			else {
-				System.out.println("	*Nombre: " + r.getPiezas().get(4).getNombre());
-				System.out.println("	*Codigo: " + r.getPiezas().get(4).getCodigo());					
-				System.out.println("	*Pais de origen: " + r.getPiezas().get(4).getPaisOrigen().getNombre());
-				System.out.println("====================");
+				}else {
+					System.out.println("Este robot no tiene cualidad extra.");
+					System.out.println("====================");
+				}
+				
 			}
 		}
 	}
@@ -1030,6 +1029,18 @@ public class SistemaImpl implements Sistema{
 		if(!robots.isEmpty()) {
 			for(Robot r : robots) {
 				String linea = r.getNombre()+",";
+				
+				for(Pieza p : r.getPiezas()) {
+					if(p!=null) {
+						linea += p.getNombre()+",";
+					}else {
+						linea += "sin cualidad,";
+					}
+				}
+				linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
+				archR.write(linea);
+				
+				/*
 				if(r.getPiezas().get(4) != null) {
 					for(Pieza p : r.getPiezas()) {
 						linea += p.getNombre()+",";
@@ -1043,12 +1054,13 @@ public class SistemaImpl implements Sistema{
 							linea += "sin cualidad,";
 						}
 						else {
+							System.out.println(r.getPiezas().get(i).getNombre());
 							linea += r.getPiezas().get(i).getNombre()+",";
 						}
 					}
 					linea += r.getArma().getNombre()+","+r.getEquipo().getNombre()+","+r.getPiloto().getIdentificacion()+"\n";
 					archR.write(linea);
-				}
+				}*/
 			}
 		}else {
 			archR.write("");
