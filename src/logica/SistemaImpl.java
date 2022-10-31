@@ -178,7 +178,7 @@ public class SistemaImpl implements Sistema{
 						if(p.getNombre().equals(partes[i])) {
 							robot.getPiezas().add(p);
 						}
-						if(partes[5].equals("sin cualidad")) {
+						if(partes[i].equals("sin cualidad")) {
 							robot.getPiezas().add(null);
 						}
 					}
